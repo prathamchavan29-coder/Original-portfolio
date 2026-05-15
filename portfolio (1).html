@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prathamesh Pandit Chavan — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #faf7f2;
+      --warm-white: #fff9f4;
+      --sand: #e8ddd0;
+      --terracotta: #c4714a;
+      --terracotta-light: #e8956d;
+      --deep: #2b2118;
+      --mid: #6b5644;
+      --soft: #9e8777;
+      --accent: #d4a853;
+      --accent-light: #f0d49a;
+      --green: #5a7a5c;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--deep);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,247,242,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--sand);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 5%;
+      height: 64px;
+    }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--terracotta);
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--mid);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--terracotta); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px 8% 60px;
+      background: var(--warm-white);
+      position: relative;
+      overflow: hidden;
+      gap: 4rem;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-light) 0%, transparent 70%);
+      opacity: 0.5;
+    }
+    #hero::after {
+      content: '';
+      position: absolute; bottom: -60px; left: 10%;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f5e0d0 0%, transparent 70%);
+      opacity: 0.6;
+    }
+    .hero-text { position: relative; z-index: 1; animation: fadeUp 0.9s ease both; }
+    .hero-greeting {
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      line-height: 1.1;
+      color: var(--deep);
+      margin-bottom: 1.2rem;
+    }
+    .hero-name em { color: var(--terracotta); font-style: italic; }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--mid);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .hero-dob {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--soft);
+      background: var(--sand);
+      border-radius: 20px;
+      padding: 0.4rem 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--terracotta);
+      color: #fff;
+      border: none;
+      padding: 0.85rem 2rem;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--terracotta-light); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--terracotta);
+      border: 1.5px solid var(--terracotta);
+      padding: 0.85rem 2rem;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover { background: var(--terracotta); color: #fff; transform: translateY(-2px); }
+
+    /* Photo frame */
+    .hero-photo { position: relative; z-index: 1; animation: fadeUp 0.9s 0.2s ease both; display: flex; justify-content: center; }
+    .photo-frame {
+      position: relative;
+      width: 320px; height: 380px;
+    }
+    .photo-frame::before {
+      content: '';
+      position: absolute; top: 18px; left: 18px;
+      width: 100%; height: 100%;
+      border: 2px solid var(--terracotta);
+      border-radius: 8px;
+      z-index: 0;
+    }
+    .photo-inner {
+      position: relative; z-index: 1;
+      width: 100%; height: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      background: linear-gradient(145deg, #e8d5c4, #c4a08a);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 0 20px 60px rgba(43,33,24,0.18);
+    }
+    .photo-avatar {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--terracotta) 0%, var(--accent) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 8px 32px rgba(196,113,74,0.4);
+    }
+    .photo-label {
+      font-size: 0.8rem;
+      color: var(--deep);
+      opacity: 0.65;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 90px 8%; }
+    section:nth-child(even) { background: var(--warm-white); }
+
+    .section-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--deep);
+      margin-bottom: 3rem;
+      line-height: 1.2;
+    }
+    .section-title span { color: var(--terracotta); font-style: italic; }
+
+    /* ─── ABOUT ─── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .about-text p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+      font-weight: 300;
+    }
+    .info-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .info-card {
+      background: var(--cream);
+      border: 1px solid var(--sand);
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      display: flex; align-items: center; gap: 1rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .info-card:hover { border-color: var(--terracotta); transform: translateX(6px); }
+    .info-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--accent-light);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .info-label { font-size: 0.72rem; color: var(--soft); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.2rem; }
+    .info-value { font-size: 0.95rem; color: var(--deep); font-weight: 500; }
+
+    /* ─── EDUCATION ─── */
+    .edu-card {
+      background: var(--cream);
+      border: 1px solid var(--sand);
+      border-radius: 12px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 2rem;
+      align-items: start;
+      max-width: 700px;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .edu-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+      background: linear-gradient(to bottom, var(--terracotta), var(--accent));
+      border-radius: 4px 0 0 4px;
+    }
+    .edu-card:hover { box-shadow: 0 12px 40px rgba(43,33,24,0.12); }
+    .edu-year {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      color: var(--terracotta);
+      font-weight: 700;
+      line-height: 1.4;
+      text-align: center;
+      padding-top: 0.2rem;
+    }
+    .edu-degree {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--deep);
+      margin-bottom: 0.4rem;
+    }
+    .edu-college { font-size: 0.95rem; color: var(--mid); margin-bottom: 0.8rem; }
+    .edu-badge {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--deep);
+      font-size: 0.75rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── HOBBIES ─── */
+    .hobbies-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .hobby-card {
+      background: var(--cream);
+      border: 1px solid var(--sand);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: default;
+    }
+    .hobby-card:hover {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(196,113,74,0.25);
+    }
+    .hobby-card:hover .hobby-icon { background: rgba(255,255,255,0.2); }
+    .hobby-card:hover .hobby-name { color: #fff; }
+    .hobby-card:hover .hobby-desc { color: rgba(255,255,255,0.8); }
+    .hobby-icon {
+      width: 70px; height: 70px;
+      background: var(--accent-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1.2rem;
+      transition: background 0.3s;
+    }
+    .hobby-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--deep);
+      margin-bottom: 0.5rem;
+      transition: color 0.3s;
+    }
+    .hobby-desc { font-size: 0.88rem; color: var(--soft); line-height: 1.6; transition: color 0.3s; }
+
+    /* ─── ACHIEVEMENT ─── */
+    .achievement-card {
+      background: linear-gradient(135deg, var(--deep) 0%, #3d2e22 100%);
+      border-radius: 16px;
+      padding: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      max-width: 750px;
+      position: relative;
+      overflow: hidden;
+    }
+    .achievement-card::before {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+      opacity: 0.15;
+    }
+    .trophy-icon {
+      font-size: 5rem;
+      flex-shrink: 0;
+      filter: drop-shadow(0 4px 16px rgba(212,168,83,0.5));
+    }
+    .achievement-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .achievement-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+    .achievement-desc { font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.7; font-weight: 300; }
+
+    /* ─── CONTACT ─── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .contact-card {
+      background: var(--cream);
+      border: 1px solid var(--sand);
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s;
+    }
+    .contact-card:hover {
+      border-color: var(--terracotta);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(196,113,74,0.14);
+    }
+    .contact-icon-wrap {
+      width: 54px; height: 54px; flex-shrink: 0;
+      background: var(--accent-light);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .contact-type { font-size: 0.72rem; color: var(--soft); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .contact-value { font-size: 0.95rem; color: var(--deep); font-weight: 500; word-break: break-all; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--deep);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 2.5rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+    }
+    footer span { color: var(--terracotta-light); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; text-align: center; padding: 100px 6% 60px; }
+      .hero-photo { order: -1; }
+      .photo-frame { width: 240px; height: 290px; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hobbies-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .achievement-card { flex-direction: column; text-align: center; gap: 1.5rem; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 60px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-brand">PPC.</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#hobbies">Hobbies</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text">
+      <p class="hero-greeting">👋 Hello, I am</p>
+      <h1 class="hero-name">Prathamesh<br/><em>Pandit Chavan</em></h1>
+      <p class="hero-sub">
+        Civil Engineering student at MIT Academy of Engineering, Alandi — passionate about building, creating, and competing.
+      </p>
+      <div class="hero-dob">🎂 Born 29 October 2006 &nbsp;·&nbsp; Batch 2025–2029</div>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Get In Touch</a>
+        <a href="#about" class="btn-ghost">Know More</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-frame">
+        <div class="photo-inner">
+          <div class="photo-avatar">PC</div>
+          <p class="photo-label">Prathamesh Chavan</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-tag">Who I Am</div>
+    <h2 class="section-title">A Little <span>About Me</span></h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I'm Prathamesh Pandit Chavan, a first-year B.Tech Civil Engineering student at MIT Academy of Engineering, Alandi (Batch 2025–2029). I'm driven by curiosity and a love for challenges, whether on the sports field, at the canvas, or behind a keyboard.
+        </p>
+        <p>
+          From winning hackathons to exploring the fundamentals of civil engineering, I strive to bring creativity and analytical thinking together in everything I do.
+        </p>
+      </div>
+      <div class="info-cards reveal">
+        <div class="info-card">
+          <div class="info-icon">👤</div>
+          <div>
+            <div class="info-label">Full Name</div>
+            <div class="info-value">Prathamesh Pandit Chavan</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🎂</div>
+          <div>
+            <div class="info-label">Date of Birth</div>
+            <div class="info-value">29 October 2006</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Address</div>
+            <div class="info-value">Ch. Sambhajinagar, Maharashtra</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🎓</div>
+          <div>
+            <div class="info-label">Current Status</div>
+            <div class="info-value">B.Tech Civil Engineering — Year 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-tag">My Academic Journey</div>
+    <h2 class="section-title">Education &amp; <span>Learning</span></h2>
+    <div class="edu-card reveal">
+      <div class="edu-year">2025<br/>—<br/>2029</div>
+      <div>
+        <div class="edu-degree">B.Tech — Civil Engineering</div>
+        <div class="edu-college">🏛️ MIT Academy of Engineering, Alandi, Pune</div>
+        <span class="edu-badge">First Year • Currently Enrolled</span>
+        <p style="margin-top:1rem; font-size:0.9rem; color:var(--soft); line-height:1.7;">
+          Studying the fundamentals of civil engineering — structures, materials, surveying, and sustainable infrastructure — while developing skills in problem-solving and innovation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOBBIES -->
+  <section id="hobbies">
+    <div class="section-tag">What I Love</div>
+    <h2 class="section-title">My <span>Hobbies</span></h2>
+    <div class="hobbies-grid">
+      <div class="hobby-card reveal">
+        <div class="hobby-icon">⚽</div>
+        <div class="hobby-name">Sports</div>
+        <div class="hobby-desc">Staying active through competitive sports — building teamwork, discipline, and a winning mindset on and off the field.</div>
+      </div>
+      <div class="hobby-card reveal">
+        <div class="hobby-icon">🎨</div>
+        <div class="hobby-name">Art</div>
+        <div class="hobby-desc">Expressing creativity through sketching, drawing, and visual art — bridging imagination with precision and design thinking.</div>
+      </div>
+      <div class="hobby-card reveal">
+        <div class="hobby-icon">💻</div>
+        <div class="hobby-name">Programming</div>
+        <div class="hobby-desc">Exploring the world of code — building projects, solving logic puzzles, and competing in hackathons to sharpen technical skills.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="section-tag">Milestones</div>
+    <h2 class="section-title">My <span>Achievements</span></h2>
+    <div class="achievement-card reveal">
+      <div class="trophy-icon">🏆</div>
+      <div>
+        <div class="achievement-label">Competition Winner</div>
+        <div class="achievement-title">Hackathon Winner</div>
+        <div class="achievement-desc">
+          Demonstrated exceptional problem-solving, coding ability, and teamwork to clinch victory at a competitive hackathon event — a testament to creativity under pressure and the drive to build innovative solutions.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-tag">Reach Out</div>
+    <h2 class="section-title">Contact &amp; <span>Connect</span></h2>
+    <div class="contact-grid">
+      <a class="contact-card reveal" href="mailto:pratham.chavan29@gmail.com">
+        <div class="contact-icon-wrap">📧</div>
+        <div>
+          <div class="contact-type">Email</div>
+          <div class="contact-value">pratham.chavan29@gmail.com</div>
+        </div>
+      </a>
+      <a class="contact-card reveal" href="tel:+918087887079">
+        <div class="contact-icon-wrap">📱</div>
+        <div>
+          <div class="contact-type">Mobile</div>
+          <div class="contact-value">+91 8087887079</div>
+        </div>
+      </a>
+      <div class="contact-card reveal">
+        <div class="contact-icon-wrap">📍</div>
+        <div>
+          <div class="contact-type">Address</div>
+          <div class="contact-value">Ch. Sambhajinagar, Maharashtra, India</div>
+        </div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-icon-wrap">🏛️</div>
+        <div>
+          <div class="contact-type">College</div>
+          <div class="contact-value">MIT Academy of Engineering, Alandi</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Crafted with ❤️ by <span>Prathamesh Pandit Chavan</span> &nbsp;·&nbsp; B.Tech Civil Engineering &nbsp;·&nbsp; Batch 2025–2029</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => observer.observe(r));
+
+    // Stagger hobby cards
+    document.querySelectorAll('.hobby-card').forEach((c, i) => {
+      c.style.transitionDelay = `${i * 0.12}s`;
+    });
+  </script>
+</body>
+</html>
